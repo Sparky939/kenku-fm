@@ -169,25 +169,25 @@ export const playback: (manager: PlayerManager) => FastifyPluginCallback =
       }
     );
 
-    fastify.post("/next", (request, reply) => {
-      const view = manager.getView();
-      if (view) {
-        view.send("PLAYER_REMOTE_PLAYLIST_PLAYBACK_NEXT");
-        reply.status(200).send(request.body);
-      } else {
-        reply.status(503).send(VIEW_ERROR);
-      }
-    });
+    fastify.put("/next", (request, reply) => {
+			const view = manager.getView();
+			if (view) {
+				view.send("PLAYER_REMOTE_PLAYLIST_PLAYBACK_NEXT");
+				reply.status(200).send(request.body);
+			} else {
+				reply.status(503).send(VIEW_ERROR);
+			}
+		});
 
-    fastify.post("/previous", (request, reply) => {
-      const view = manager.getView();
-      if (view) {
-        view.send("PLAYER_REMOTE_PLAYLIST_PLAYBACK_PREVIOUS");
-        reply.status(200).send(request.body);
-      } else {
-        reply.status(503).send(VIEW_ERROR);
-      }
-    });
+    fastify.put("/previous", (request, reply) => {
+			const view = manager.getView();
+			if (view) {
+				view.send("PLAYER_REMOTE_PLAYLIST_PLAYBACK_PREVIOUS");
+				reply.status(200).send(request.body);
+			} else {
+				reply.status(503).send(VIEW_ERROR);
+			}
+		});
 
     fastify.put<{
       Body: RepeatRequestType;
